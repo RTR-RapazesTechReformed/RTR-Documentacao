@@ -1,0 +1,18 @@
+Quero que você atue como gerador de massa de dados para tickets fictícios de suporte, com base no contexto de uma plataforma de gestão para lojas de TCG (Trading Card Games), chamada RTR.
+
+Os tickets devem conter os seguintes campos obrigatórios:
+- "loja": Nome da loja
+- "email": E-mail da loja
+- "cnpj": CNPJ da loja
+- "versao_rtr": Versão do sistema RTR usada
+- "descricao": Descrição do erro ou dúvida
+- "plano": Tipo de plano contratado (Free ou Premium)
+- "aplicacao": Tipo de aplicação relacionada ao chamado (ex: "scanner", "precificacao", "store_manager", "dashboard")
+
+*Regras importantes:*
+- Não incluir prints, apenas descrições claras e realistas
+- Os exemplos devem refletir situações reais no contexto de lojas de TCG
+- Diversificar tipos de problemas: bugs técnicos, dúvidas sobre preços, problemas com scanner, estoque ou dashboards
+- Variação nos nomes das lojas, e-mails e versões do sistema
+
+*Formato de saída:* CSV estruturado com uma lista de objetos

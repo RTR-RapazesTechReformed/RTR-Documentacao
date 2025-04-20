@@ -1,0 +1,49 @@
+Quero que você atue como gerador de massa de dados para tickets fictícios de suporte, com base no contexto de uma plataforma de gestão para lojas de TCG (Trading Card Games), chamada RTR.
+
+Os tickets gerados devem seguir as seguintes diretrizes:
+
+### Campos obrigatórios:
+- **loja**: Nome da loja que abriu o ticket.
+- **email**: E-mail de contato da loja.
+- **cnpj**: CNPJ da loja para identificação formal.
+- **versao_rtr**: Versão do sistema RTR que a loja está utilizando.
+- **descricao**: Descrição do erro ou dúvida relacionada à plataforma.
+- **plano**: Tipo de plano contratado pela loja, podendo ser **Free** ou **Premium**.
+- **aplicacao**: Área ou funcionalidade relacionada ao ticket, como "scanner", "precificacao", "store_manager", "dashboard", entre outros.
+
+### **Regras para os Tickets**:
+- **Diversidade de problemas**: Os tickets devem incluir uma variedade de tipos de problemas, como bugs técnicos (scanner, sistema, banco de dados), dúvidas sobre precificação, problemas com estoque, configurações de dashboards, etc.
+- **Detalhes realistas**: As descrições devem ser claras, com situações realistas e comuns no contexto de lojas de TCG. Não é necessário incluir prints, apenas descrições completas e precisas.
+- **Variação nas informações**: É importante variar as lojas, e-mails e versões do sistema RTR em cada ticket, garantindo dados diversificados e realistas.
+- **Padrão de Formatação**: O formato de saída será um **CSV estruturado**, com uma lista de objetos que devem seguir as regras abaixo.
+
+### **Formato de Saída (CSV)**:
+Os dados devem ser estruturados nas seguintes colunas:
+
+| Coluna              | Descrição                                                                 |
+|---------------------|---------------------------------------------------------------------------|
+| **ID_Ticket**       | Identificador único do atendimento (incremental, ex.: 001, 002, 003…).    |
+| **Data_Abertura**   | Data e hora em que o ticket foi aberto. Este campo será usado para cálculo de SLA. |
+| **Canal_Contato**   | Meio pelo qual o cliente entrou em contato (E-mail, WhatsApp, Chat…).     |
+| **Nome_Loja**       | Nome da loja que está fazendo o chamado.                                  |
+| **CNPJ**            | CNPJ da loja para identificação formal.                                   |
+| **Versao_Sistema**  | Versão do sistema RTR utilizada pela loja.                                |
+| **Tipo_Plano**      | Tipo de plano contratado pela loja (Free ou Premium).                     |
+| **Categoria_Problema** | Classificação do problema (ex.: Técnico, Consultoria, Operações).        |
+| **Descricao_Problema** | Descrição detalhada do problema ou dúvida.                               |
+| **Prioridade**      | Prioridade do atendimento (Baixa, Média, Alta), conforme regras definidas.|
+| **Responsavel**     | Time responsável pelo atendimento (Técnico, Consultoria, etc.).            |
+| **SLA_Resposta**    | Tempo esperado de resposta (em horas), baseado na prioridade e no tipo de plano. |
+| **Data_Solucao**    | Data e hora quando o ticket foi fechado/resolvido.                        |
+| **Tempo_Resolucao** | Tempo decorrido entre a abertura e a resolução do ticket.                 |
+| **Status**          | Status atual do ticket (Aberto, Em andamento, Resolvido, Escalado).       |
+
+---
+
+### **Exemplo de saída (para visualização)**:
+
+| ID_Ticket | Data_Abertura       | Canal_Contato | Nome_Loja     | CNPJ               | Versao_Sistema | Tipo_Plano | Categoria_Problema | Descricao_Problema                                         | Prioridade | Responsavel | SLA_Resposta | Data_Solucao       | Tempo_Resolucao | Status   |
+|-----------|---------------------|---------------|---------------|--------------------|----------------|------------|--------------------|-----------------------------------------------------------|------------|-------------|--------------|--------------------|-----------------|----------|
+| 001       | 2025-04-01 00:00:00 | E-mail        | CardMaster SP | 12.345.678/0001-90 | RTR 3.2.1      | Premium    | Técnico            | Scanner não identificou a carta ‘Charizard VMAX’ mesmo estando em perfeito estado. | Alta       | Técnico     | 4            | 2025-04-01 06:00:00 | 0 days 06:00:00 | Resolvido |
+| 002       | 2025-04-01 12:00:00 | E-mail        | Dragon Cards  | 98.765.432/0001-55 | RTR 3.1.0      | Free       | Consultoria        | O algoritmo sugeriu preço abaixo do mercado para ‘Pikachu Illustrator’. Como ajustar? | Baixa      | Consultoria | 24           | 2025-04-02 14:00:00 | 1 day 02:00:00 | Resolvido |
+| 003       | 2025-04-02 00:00:00 | E-mail        | Magic Point   | 22.334.556/0001-11 | RTR 3.2.1      | Premium    | Técnico            | Após atualização, o scanner trava ao escanear cartas foil. | Alta       | Técnico     | 4            | 2025-04-02 06:00:00 | 0 days 06:00:00 | Resolvido |

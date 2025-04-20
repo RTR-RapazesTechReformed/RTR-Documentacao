@@ -1,0 +1,16 @@
+Coluna			Descrição
+ID_Ticket		Identificador único do atendimento. Pode ser incremental (ex.: 001, 002…).
+Data_Abertura		Data e hora em que o ticket foi aberto. Vai servir pra cálculo de SLA.
+Canal_Contato		Onde o cliente entrou em contato (E-mail, WhatsApp, Chat…).
+Nome_Loja		Nome da loja que abriu o chamado.
+CNPJ			CNPJ da loja, ajuda na identificação formal.
+Versao_Sistema		Versão do sistema RTR que a loja está usando. Útil pra diagnóstico.
+Tipo_Plano		Premium ou Free — define prioridades de SLA e atendimento.
+Categoria_Problema	Classificação do problema (Técnico, Consultoria, Operações).
+Descricao_Problema	Descrição textual do que está acontecendo.
+Prioridade		Baixa, Média, Alta — conforme regras definidas no fluxo.
+Responsavel		Time designado (Técnico, Consultoria, etc). Pode ser preenchido por automação.
+SLA_Resposta		Tempo esperado de resposta (em horas), baseado na prioridade. (Vai ser calculado com Data_Abertura X Prioridade X Tipo_Plano)
+Data_Solucao		Quando o ticket foi fechado/resolvido.
+Tempo_Resolucao		Tempo decorrido entre abertura e resolução. Pode ser calculado.
+Status			Aberto, Em andamento, Resolvido, Escalado.
