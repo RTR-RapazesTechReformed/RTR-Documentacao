@@ -12,18 +12,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Variáveis
-x = LpVariable("MManual", cat="Continuous", lowBound=1, upBound=10)
-y = LpVariable("MOcr", cat="Continuous", lowBound=1, upBound=10)
+x = LpVariable("MManual", cat="Continuous")
+y = LpVariable("MOcr", cat="Continuous")
 
 # Problemas Lineares
-prob = LpProblem("Minimização de custos")
+prob = LpProblem("Minimização de custos", LpMinimize)
 
 # Objetivo e restrições
-prob += 0.54*x + 0.10*y # função objetivo
-prob += x+y >= 500
-prob += x+y <= 2880
+prob += 0.54*x + 0.0001*y # função objetivo
+prob += x+y == 100
+prob += x+y <= 100
 prob += x >= 0.4*(x+y)
-prob += 0.1*y <= 30
+prob += 0.0001*y <= 5
 
 # Resolver o modelo utilizando o método solve()
 status = prob.solve()
@@ -45,7 +45,7 @@ custo = value(prob.objective)
 x_range = np.linspace(0, 3000, 500)
 
 # Restrições
-y1 = 2880 - x_range               # x + y <= 2880
+y1 = 100 - x_range               # x + y <= 2880
 y2 = (3/2)*x_range                 # x >= 0.4(x+y) -> y <= 1.5x
 y3 = 300 * np.ones_like(x_range)   # 0.1*y <= 30 -> y <= 300
 
@@ -58,12 +58,12 @@ plt.fill_between(x_range, 0, np.minimum(np.minimum(y1, y2), y3), color='lightblu
 plt.scatter(x_val, y_val, color='red', s=100, label='Solução ótima')
 
 # Linhas das restrições
-plt.plot(x_range, y1, label='x + y <= 2880')
+plt.plot(x_range, y1, label='x + y <= 100')
 plt.plot(x_range, y2, label='x >= 0.4*(x+y)')
-plt.plot(x_range, y3, label='0.1*y <= 30')
+plt.plot(x_range, y3, label='0.0001*y <= 5')
 
-plt.xlim(0, 3000)
-plt.ylim(0, 350)
+plt.xlim(0, 100)
+plt.ylim(0, 100)
 plt.xlabel('MManual (x)')
 plt.ylabel('MOcr (y)')
 plt.title('Região Viável e Solução Ótima')
